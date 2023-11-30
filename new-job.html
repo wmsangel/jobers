@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content=""/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://lk.jobers.ru/jobers/css/tariffs_modal.css">
+
+    <style>
+      .no-candidates {
+        color: #333;
+        font-family: "Open Sans", sans-serif;
+        font-size: 16px;
+        line-height: normal;
+        display: flex;
+        flex-wrap: wrap;
+        margin: auto;
+        width: 736px;
+        max-width: calc(100% - 40px);
+      }
+
+      .no-candidates__wrapper {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .no-candidates__title {
+        font-size: 2em;
+        margin-bottom: 0.9em;
+        width: 100%;
+      }
+
+      .no-candidates__icon {
+        margin-right: 28px;
+      }
+
+      .no-candidates__text {
+        font-size: 16px;
+        line-height: normal;
+      }
+
+      .no-candidates__button {
+        margin-top: 36px;
+        padding: 12px 20px;
+      }
+
+      @media (max-width: 639px) {
+        .no-candidates {
+          font-size: 12px;
+        }
+      }
+    </style>
+    <style>
+      .vacancies-section__empty {
+        display: flex;
+        align-items: stretch;
+        flex-direction: column;
+        bottom: 0;
+        align-self: stretch;
+        flex-grow: 1;
+      }
+
+      .table__text {
+        white-space: nowrap;
+      }
+    </style>
+    <link rel="shortcut icon" href="https://lk.jobers.ru/jobers-favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://lk.jobers.ru/last/css/style.css?t=1687269580">
+    <link rel="stylesheet" href="https://lk.jobers.ru/css/noty.css">
+    <style>
+      .table__control {
+        width: 900px;
+      }
+    </style>
+    <style>
+      .confirm-modal {
+        background: #FFFFFF;
+        border: 1px solid #E5E5E5;
+        box-sizing: border-box;
+        border-radius: 4px;
+        padding: 50px 20px 30px;
+        position: relative;
+        /*width: 400px;*/
+        width: 416px;
+      }
+
+      .confirm-modal__title {
+        font-family: "Open Sans", sans-serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 25px;
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 0 20px;
+      }
+
+      .confirm-modal__close {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        cursor: pointer;
+      }
+
+      .confirm-modal__btns {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .confirm-modal__btns button {
+        width: calc(50% - 20px);
+      }
+
+      .confirm-modal__btns a {
+        display: block;
+        width: 100%;
+      }
+
+      .confirm-modal__title-quoute:not(:empty):before {
+        content: "\"";
+      }
+
+      .confirm-modal__title-quoute:not(:empty):after {
+        content: "\"";
+      }
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://lk.jobers.ru/libs/select2.min.css">
+    <link rel="stylesheet" href="https://lk.jobers.ru/jobers/css/styles.css">
+    <link rel="stylesheet" href="https://lk.jobers.ru/jobers/css/total.css?t=1687269576">
+    <link rel="stylesheet" href="https://lk.jobers.ru/jobers/css/autofit.css?t=1701326162">
+    <title>Вакансии</title>
+    <link href="https://lk.jobers.ru/jobers/css/fonts.css" rel="stylesheet">
+
+    <link href="css/custom.css" rel="stylesheet">
+</head>
+<body class="">
+<section class="page-wrap full-screen">
+    <aside class="aside">
+        <form action="" class="aside__filter js-form-ajax" method="get">
+            <a href="/" class="logo"></a>
+            <div class="sidebar-scroll scroll">
+                <div class="aside__filter-block">
+                    <p class="aside__filter-title">
+                        <img class="svg-icon icon-aside-1" style="transform: rotate(-90deg);"
+                             src="https://lk.jobers.ru/last/images/aside-icon-1.svg">
+                        Сортировка
+                    </p>
+                    <div class="aside__filter-list">
+                        <label class="aside__radio">
+                            <input type="radio" name="sort" value="created_at,desc" class="js-filter-input"
+                                   data-method="get">
+                            <span class="aside__radio-btn">
+        <img class="svg-icon " src="https://lk.jobers.ru/last/images/checkedcircle.svg" alt="">
+    </span>
+                            <span class="aside__radio-text">Сначала недавно созданные</span>
+                        </label> <label class="aside__radio">
+                        <input type="radio" name="sort" value="created_at,asc" class="js-filter-input"
+                               data-method="get">
+                        <span class="aside__radio-btn">
+        <img class="svg-icon " src="https://lk.jobers.ru/last/images/checkedcircle.svg" alt="">
+    </span>
+                        <span class="aside__radio-text">Сначала давно созданные</span>
+                    </label> <label class="aside__radio">
+                        <input type="radio" name="sort" value="title,asc" class="js-filter-input" data-method="get">
+                        <span class="aside__radio-btn">
+        <img class="svg-icon " src="https://lk.jobers.ru/last/images/checkedcircle.svg" alt="">
+    </span>
+                        <span class="aside__radio-text">По алфавиту от А до Я</span>
+                    </label> <label class="aside__radio">
+                        <input type="radio" name="sort" value="title,desc" class="js-filter-input" data-method="get">
+                        <span class="aside__radio-btn">
+        <img class="svg-icon " src="https://lk.jobers.ru/last/images/checkedcircle.svg" alt="">
+    </span>
+                        <span class="aside__radio-text">По алфавиту от Я до А</span>
+                    </label></div><!--aside__filter-list-->
+                </div><!--aside__filter-block-->
+                <div class="aside__filter-block">
+                    <p class="aside__filter-title">
+                        <img class="svg-icon icon-aside-2" src="https://lk.jobers.ru/last/images/aside-icon-2.svg">
+                        Регион
+                    </p>
+                    <div class="aside__filter-list">
+                        <label class="aside__checkbox">
+                            <input type="checkbox" name="region" value="Донецкая область" class="js-filter-input"
+                                   data-method="get">
+                            <span class="aside__checkbox-btn">
+        <img class="svg-icon " src="https://lk.jobers.ru/last/images/checkedcircle.svg" alt="">
+    </span>
+                            <span class="aside__checkbox-text">Донецкая область</span>
+                        </label> <label class="aside__checkbox">
+                        <input type="checkbox" name="region" value="Москва" class="js-filter-input" data-method="get">
+                        <span class="aside__checkbox-btn">
+        <img class="svg-icon " src="https://lk.jobers.ru/last/images/checkedcircle.svg" alt="">
+    </span>
+                        <span class="aside__checkbox-text">Москва</span>
+                    </label> <label class="aside__checkbox">
+                        <input type="checkbox" name="region" value="Омская область" class="js-filter-input"
+                               data-method="get">
+                        <span class="aside__checkbox-btn">
+        <img class="svg-icon " src="https://lk.jobers.ru/last/images/checkedcircle.svg" alt="">
+    </span>
+                        <span class="aside__checkbox-text">Омская область</span>
+                    </label> <label class="aside__checkbox">
+                        <input type="checkbox" name="region" value="Санкт-Петербург" class="js-filter-input"
+                               data-method="get">
+                        <span class="aside__checkbox-btn">
+        <img class="svg-icon " src="https://lk.jobers.ru/last/images/checkedcircle.svg" alt="">
+    </span>
+                        <span class="aside__checkbox-text">Санкт-Петербург</span>
+                    </label> <label class="aside__checkbox">
+                        <input type="checkbox" name="region" value="Тульская область" class="js-filter-input"
+                               data-method="get">
+                        <span class="aside__checkbox-btn">
+        <img class="svg-icon " src="https://lk.jobers.ru/last/images/checkedcircle.svg" alt="">
+    </span>
+                        <span class="aside__checkbox-text">Тульская область</span>
+                    </label></div><!--aside__filter-list-->
+
+                </div><!--aside__filter-block-->
+                <div class="aside__filter-block">
+                    <p class="aside__filter-title">
+                        <img class="svg-icon icon-aside-3" src="https://lk.jobers.ru/last/images/aside-icon-3.svg">
+                        Статус
+                    </p>
+
+                    <div class="aside__filter-list">
+                        <label class="aside__checkbox">
+                            <input type="checkbox" name="status" value="notFilled" class="js-filter-input"
+                                   data-method="get">
+                            <span class="aside__checkbox-btn">
+        <img class="svg-icon " src="https://lk.jobers.ru/last/images/checkedcircle.svg" alt="">
+    </span>
+                            <span class="aside__checkbox-text">Не заполнена</span>
+                        </label> <label class="aside__checkbox">
+                        <input type="checkbox" name="status" value="readyForPublication" class="js-filter-input"
+                               data-method="get">
+                        <span class="aside__checkbox-btn">
+        <img class="svg-icon " src="https://lk.jobers.ru/last/images/checkedcircle.svg" alt="">
+    </span>
+                        <span class="aside__checkbox-text">Готова к публикации</span>
+                    </label> <label class="aside__checkbox">
+                        <input type="checkbox" name="status" value="moderated" class="js-filter-input"
+                               data-method="get">
+                        <span class="aside__checkbox-btn">
+        <img class="svg-icon " src="https://lk.jobers.ru/last/images/checkedcircle.svg" alt="">
+    </span>
+                        <span class="aside__checkbox-text">На модерации</span>
+                    </label> <label class="aside__checkbox">
+                        <input type="checkbox" name="status" value="activated" class="js-filter-input"
+                               data-method="get">
+                        <span class="aside__checkbox-btn">
+        <img class="svg-icon " src="https://lk.jobers.ru/last/images/checkedcircle.svg" alt="">
+    </span>
+                        <span class="aside__checkbox-text">Активна</span>
+                    </label>
+                    </div><!--aside__filter-list-->
+
+                </div><!--aside__filter-block-->
+            </div>
+        </form>
+    </aside>
+    <section class="page-content full-block-screen">
+        <div class="full-height__stretched">
+            <header class="header spacer">
+                <a href="/" class="logo__header">
+                    <img src="https://lk.jobers.ru/last/images/jobers-logo.svg" alt="" width="166" height="40px">
+                </a>
+                <div class="header__left spacer">
+                    <a href="/vacancies/new">
+                        <button class="blue-btn header__btn">
+                            Добавить вакансию
+                        </button>
+                    </a>
+                    <ul class="nav spacer">
+                        <li class="nav__item">
+                            <a href="/"
+                               class="nav__link  active ">
+                                <img class="svg-icon icon-nav-1"
+                                     src="https://lk.jobers.ru/last/images/icon-header-1.svg">
+                                <span>Вакансии</span>
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="/employees"
+                               class="nav__link ">
+                                <img class="svg-icon icon-nav-2"
+                                     src="https://lk.jobers.ru/last/images/icon-header-2.svg">
+                                <span>Кандидаты</span>
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="/tariffs/create"
+                               class="nav__link ">
+                                <img class="svg-icon icon-nav-3"
+                                     src="https://lk.jobers.ru/last/images/icon-header-3.svg">
+                                <span>Тарифы</span>
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="/settings?tab=profile"
+                               class="nav__link ">
+                                <img class="svg-icon icon-nav-4"
+                                     src="https://lk.jobers.ru/last/images/icon-header-4.svg">
+                                <span>Настройки</span>
+                            </a>
+                        </li>
+                        <li class="nav__item">
+                                            <span class="nav__link ">
+                            <img class="svg-icon icon-nav-5" src="https://lk.jobers.ru/last/images/icon-header-5.svg">
+                            <span>Еще</span>
+                        </span>
+                            <ul class="nav__sec">
+                                <li>
+                                    <a href="/settings?tab=profile"
+                                       class="nav__sec-link ">Профиль</a>
+                                </li>
+                                <li>
+                                    <a href="/settings?tab=companies"
+                                       class="nav__sec-link ">Компании</a>
+                                </li>
+                                <li>
+                                    <a href="/settings?tab=managers"
+                                       class="nav__sec-link ">Менеджеры</a>
+                                </li>
+                                <li>
+                                    <a href="/settings?tab=my_tariffs"
+                                       class="nav__sec-link ">Лицевой счет</a>
+                                </li>
+                                <li>
+                                    <a href="/settings?tab=documents"
+                                       class="nav__sec-link ">Документы</a>
+                                </li>
+                                <li>
+                                    <a href="/settings?tab=notifications"
+                                       class="nav__sec-link ">Уведомления</a>
+                                </li>
+                                <li>
+                                    <a href="/settings?tab=integrations"
+                                       class="nav__sec-link ">Интеграции</a>
+                                </li>
+                                <li>
+                                    <a href="/settings?tab=templates"
+                                       class="nav__sec-link ">Шаблоны писем</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div><!--header__left-->
+
+                <div class="header__right">
+
+                    <div class="header__link">
+                    <span class="js-drop-link">
+                        <img class="filter-icon icon-manager" src="https://lk.jobers.ru/last/images/icon-aside-1.svg"
+                             alt="">
+                    </span>
+                    </div>
+
+                    <div class="header__link js-drop-link-wrap">
+            <span class="js-drop-link">
+    <img class="svg-icon icon-manager" src="https://lk.jobers.ru/last/images/icon-header-6.svg">
+    <div class="manager drop__window">
+        <img class="manager__photo" src="https://lk.jobers.ru/img/site/human.jpg" alt="Зарзов Сергей">
+        <p class="manager__name">Алина Ботько</p>
+        <p class="manager__position">
+            персональный менеджер
+        </p>
+        <ul class="manager__contacts">
+            <li>
+                <a href="mailto:alina.d@jobers.ru">
+                    <img class="svg-icon drop__icon-manager" src="https://lk.jobers.ru/last/images/email.svg">
+                    <span>alina.d@jobers.ru</span>
+                </a>
+            </li>
+                        <li>
+                <a href="tel:+78007076348">
+                    <img class="svg-icon drop__icon-manager" src="https://lk.jobers.ru/last/images/phone.svg">
+                    <span>+78007076348 </span>
+                </a>
+            </li>
+                    </ul>
+        <p class="manager__time">
+            Звоните по любому вопросу с 09:00 до 18:00!
+        </p>
+        <p class="manager__info">
+            Ваш клиентский номер <strong>8772</strong>. Укажите его при
+            обращении, чтобы менеджер мог быстрее вам помочь.
+        </p>
+    </div><!--manager-->
+</span>
+
+                    </div><!--header__link-->
+
+                    <div class="header__link js-drop-link-wrap">
+                    <span class="js-drop-link">
+                        <img class="svg-icon icon-personal" src="https://lk.jobers.ru/last/images/icon-header-7.svg">
+
+                        <div class="personal drop__window">
+                            <div class="personal__top">
+                                <p class="personal__name">Виктория Талыкова</p>
+                                                                <p class="personal__company">
+                                                                        ООО &quot;РОГА И КОПЫТА&quot;,
+                                                                        клиент 8772
+                                                                    </p>
+
+                            </div><!--personal__top-->
+
+                            <ul class="personal__list">
+                                <li class="personal__item">
+    <a href="/settings?tab=profile&amp;subtab=info"
+       class="personal__link">
+        <span class="personal__link-icon">
+            <img src="https://lk.jobers.ru/last/images/icon-personal-1.svg" class="drop__icon">
+        </span>
+        <span class="personal__link-text">Мой профиль</span>
+    </a>
+</li>                                <li class="personal__item">
+    <a href="https://help.jobers.ru/"
+       target="_blank"
+       class="personal__link">
+        <span class="personal__link-icon">
+            <img src="https://lk.jobers.ru/last/images/icon-personal-5.svg" class="drop__icon">
+        </span>
+        <span class="personal__link-text">Документация</span>
+    </a>
+</li>                                <li class="personal__item">
+    <a href="/settings?tab=documents&amp;subtab=acts"
+       class="personal__link">
+        <span class="personal__link-icon">
+            <img src="https://lk.jobers.ru/last/images/icon-personal-2.svg" class="drop__icon">
+        </span>
+        <span class="personal__link-text">Счета и акты</span>
+    </a>
+</li>
+                                <li class="personal__item">
+    <a href="/settings?tab=my_tariffs"
+       class="personal__link">
+        <span class="personal__link-icon">
+            <img src="https://lk.jobers.ru/last/images/icon-personal-3.svg" class="drop__icon">
+        </span>
+        <span class="personal__link-text">Лицевой счет</span>
+    </a>
+</li>                                <li class="personal__item">
+    <a href=""
+       class="personal__link">
+        <span class="personal__link-icon">
+            <img src="" class="drop__icon">
+        </span>
+        <span class="personal__link-text"></span>
+    </a>
+</li>                                                                    <li class="personal__item">
+                                        <form id="logout-form" action="https://lk.jobers.ru/logout" method="POST">
+                                            <input type="hidden" name="_token"
+                                                   value="g4EPzrgH82ScGbFHtlkyGz7RSHUz7N0PyiYzTNl6">
+                                            <a class="personal__link">
+                                                <span class="personal__link-icon">
+                                                    <img src="https://lk.jobers.ru/last/images/icon-personal-4.svg"
+                                                         class="drop__icon">
+                                                </span>
+                                                <button class="personal__link-text">Выход</button>
+                                            </a>
+                                        </form>
+                                    </li>
+                                                            </ul>
+                        </div><!--personal-->
+                    </span>
+
+
+                    </div><!--header__link-->
+
+                    <div class="mobile_menu">
+                        <img src="https://lk.jobers.ru/last/images/menu-mobile__icon.svg" alt="">
+                    </div>
+
+                </div><!--header__right-->
+            </header>
+
+            <section class="new-job-wrapper">
+                <div class="new-job-wrapper__top">
+                    <div class="new-job-wrapper__top-title">Создание вакансии</div>
+                    <div class="new-job-wrapper__top-link">
+                        <a href="#">Загрузить вакансию с работного сайта</a>
+                    </div>
+                </div>
+
+                <form action="">
+                    <div class="new-job-block">
+                        <div class="new-job-block__title">Основная информация</div>
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                <label for="">Название должности <span class="required">*</span></label>
+                                <input type="text" placeholder="Автомойщик" class="input-text-field">
+                            </div>
+                        </div>
+
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                <label for="">Специализация <span class="required">*</span></label>
+                                <input type="text" placeholder="Автомойщик" class="input-text-field">
+                                <p><a href="#" class="js-popup-link link" data-popup="spec">Выбрать специализацию</a></p>
+                            </div>
+                        </div>
+
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                <label for="">Описание <span class="required">*</span></label>
+                                <textarea placeholder="Тут я понимаю должен быть ckEDITOR" class="input-textarea-field"></textarea>
+                                <p>не более <span class="accent-color">8000</span> символов, осталось символов: <span class="accent-color">8000</span></p>
+                            </div>
+                        </div>
+
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                <label for="">Тип занятости <span class="required">*</span></label>
+                                <select class="js-select-2">
+                                    <option value="">Выберите вариант</option>
+                                    <option value="">Выберите вариант</option>
+                                    <option value="">Выберите вариант</option>
+                                    <option value="">Выберите вариант</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                <label for="">График работы <span class="required">*</span></label>
+                                <select class="js-select-2">
+                                    <option value="">Выберите График работы</option>
+                                    <option value="">Выберите График работы</option>
+                                    <option value="">Выберите График работы</option>
+                                    <option value="">Выберите График работы</option>
+                                </select>
+                                <div class="info-message">
+                                    Для поиска сотрудников на удаленку выберите график «удаленная работа»
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                <label for="">Предполагаемый уровень дохода в месяц, руб <span class="required">*</span></label>
+                                <div class="field-item--group-2">
+                                    <input type="text" class="input-text-field" placeholder="От">
+                                    <input type="text" class="input-text-field" placeholder="До">
+                                </div>
+                            </div>
+
+                            <div class="field-item">
+                                <label for="radio-1" class="input-radio-field">
+                                    <input type="radio" name="1" id="radio-1"> До вычета налогов
+                                </label>
+                                <label for="radio-2" class="input-radio-field">
+                                    <input type="radio" name="1"  id="radio-2" checked> На руки
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="field-row field-row--group-2 field-row--middle">
+                            <div class="field-item field-item--full-select">
+                                <label for="">Опыт работы <span class="required">*</span></label>
+                                <select class="js-select-2">
+                                    <option value="">Выберите Опыт работы</option>
+                                    <option value="">Выберите Опыт работы</option>
+                                    <option value="">Выберите Опыт работы</option>
+                                    <option value="">Выберите Опыт работы</option>
+                                </select>
+                            </div>
+                            <div class="field-item field-item--full-select">
+                                <label for="">Образование <span class="required">*</span></label>
+                                <select class="js-select-2">
+                                    <option value="">Выберите Образование</option>
+                                    <option value="">Выберите Образование</option>
+                                    <option value="">Выберите Образование</option>
+                                    <option value="">Выберите Образование</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                <label for="">Где искать сотрудника</label>
+                                <input type="text" placeholder="Москва" class="input-text-field">
+                            </div>
+                        </div>
+
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                <label for="">Регион</label>
+                                <input type="text" placeholder="Москва" class="input-text-field">
+                            </div>
+                        </div>
+
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                <label for="">Город <span class="required">*</span></label>
+                                <input type="text" placeholder="Москва" class="input-text-field">
+                            </div>
+                        </div>
+
+                        <div class="field-row field-row--group-2 field-row--middle">
+                            <div class="field-item">
+                                <label for="">Улица</label>
+                                <input type="text" placeholder="Москва" class="input-text-field">
+                            </div>
+                            <div class="field-item">
+                                <label for="">Дом</label>
+                                <input type="text" placeholder="Москва" class="input-text-field">
+                            </div>
+                        </div>
+
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                <img src="img/map.png" alt="">
+                            </div>
+                        </div>
+
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                <label for="">Ключевые навыки</label>
+                                <input type="text" placeholder="Маркетинг" class="input-text-field">
+                            </div>
+                        </div>
+
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                <label for="">Название компании <span class="required">*</span></label>
+                                <input type="text" placeholder="ООО МИР" class="input-text-field">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="new-job-block">
+                        <div class="new-job-block__title">Контактная информация</div>
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                <label for="">Телефон для соискателей <span class="required">*</span></label>
+                                <div class="field-item--phone js-phone-wrap">
+                                    <input type="text" placeholder="+7" class="js-phone input-text-field">
+                                    <a href="#" class="btn btn-blue js-more-phone">Указать еще 1 номер</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                <label for="" class="input-check-field">
+                                    <input type="checkbox"> Не показывать номер телефона на сайтах
+                                </label>
+                                <div class="info-message">
+                                    <p><strong>Если галочка активна, в вакансии будет указан подменный номер +7 (967) 555-02-06.</strong></p>
+                                    <p>Таким образом вы не будете получать звонков от кандидатов по вакансии. Позвонив по подменному номеру, кандидат услышит сообщение от автоответчика о необходимости отклика на вакансию через сайт.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                <label for="">Имя для соискателя <span class="required">*</span></label>
+                                <input type="text" placeholder="Маркетинг" class="input-text-field">
+                            </div>
+                        </div>
+
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                <label for="">Email для соискателя</label>
+                                <input type="text" placeholder="Маркетинг" class="input-text-field">
+                            </div>
+                        </div>
+
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                ТУТ Я ТАК ПОНИМАЮ БУДЕТ КАКОЙ-ТО ПЛАГИН
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="new-job-block">
+                        <div class="new-job-block__title">Дополнительная информация</div>
+
+                        <div class="field-row field-row--middle">
+                            <div class="field-item">
+                                <div class="accordion-block">
+                                    <div class="accordion-block__btn js-accordion-block-btn">Показать</div>
+                                    <div class="accordion-block__content js-accordion-block">
+
+                                        <div class="field-row field-row--middle">
+                                            <div class="field-item">
+                                                <label for="">Дополнительные условия</label>
+                                                <label for="" class="input-check-field">
+                                                    <input type="checkbox"> ДМС
+                                                </label>
+                                                <label for="" class="input-check-field">
+                                                    <input type="checkbox"> Мобильная связь
+                                                </label>
+                                                <label for="" class="input-check-field">
+                                                    <input type="checkbox"> Мобильная связь
+                                                </label>
+                                                <label for="" class="input-check-field">
+                                                    <input type="checkbox"> Мобильная связь
+                                                </label>
+                                                <label for="" class="input-check-field">
+                                                    <input type="checkbox"> Мобильная связь
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="field-row field-row--middle">
+                                            <div class="field-item">
+                                                <label for="">Водительские права</label>
+                                                <div class="checkbox-group-inline">
+                                                    <label for="" class="input-check-field">
+                                                        <input type="checkbox"> A
+                                                    </label>
+                                                    <label for="" class="input-check-field">
+                                                        <input type="checkbox"> B
+                                                    </label>
+                                                    <label for="" class="input-check-field">
+                                                        <input type="checkbox"> C
+                                                    </label>
+                                                    <label for="" class="input-check-field">
+                                                        <input type="checkbox"> D
+                                                    </label>
+                                                    <label for="" class="input-check-field">
+                                                        <input type="checkbox"> E
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="field-row field-row--middle">
+                                            <div class="field-item">
+                                                <label for="">Дополнительные пожелания</label>
+                                                <label for="" class="input-check-field">
+                                                    <input type="checkbox"> ДМС
+                                                </label>
+                                                <label for="" class="input-check-field">
+                                                    <input type="checkbox"> Мобильная связь
+                                                </label>
+                                                <label for="" class="input-check-field">
+                                                    <input type="checkbox"> Мобильная связь
+                                                </label>
+                                                <label for="" class="input-check-field">
+                                                    <input type="checkbox"> Мобильная связь
+                                                </label>
+                                                <label for="" class="input-check-field">
+                                                    <input type="checkbox"> Мобильная связь
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="new-job-block">
+                        <div class="new-job-block__title">Выберите тип публикации</div>
+
+                        <div class="plans-choice">
+                            <div class="plan-item plan-item--selected plan-item--full js-plan-item-choice">
+                                <div class="plan-item__icon"></div>
+                                <div class="plan-item__name">Индивидуальный</div>
+                                <div class="plan-item__price">4 443 руб.</div>
+                                <div class="plan-item__balance">На счету: <span>1</span></div>
+                            </div>
+
+                            <div class="plan-item plan-item--half js-plan-item-choice">
+                                <div class="plan-item__name">Тарифы с автообновлением</div>
+                                <div class="plan-item__text">
+                                    Публикация с автоматическим обновлением вакансии на всех ведущих сайтах. Наиболее эффективный способ размещения
+                                </div>
+                            </div>
+
+                            <div class="plan-item plan-item--half js-plan-item-choice">
+                                <div class="plan-item__name">Стандартные тарифы</div>
+                                <div class="plan-item__text">
+                                    Стандартное размещение на всех ведущих работных сайтах. Подходит при неспешном поиске и небольшом бюджете
+                                </div>
+                            </div>
+
+                            <div class="plan-item plan-item--full js-plan-item-choice">
+                                <div class="plan-item__icon"></div>
+                                <div class="plan-item__name">Минимальный с автообновлением</div>
+                                <div class="plan-item__text">Публикация на 60 сайтах, включая: HH.ru, Zarplata.ru,  Rabota.ru. А также подборка резюме.</div>
+                                <div class="plan-item__price">4 443 руб.</div>
+                                <div class="plan-item__balance">На счету: <span>1</span></div>
+                            </div>
+                            <div class="plan-item plan-item--full js-plan-item-choice">
+                                <div class="plan-item__icon"></div>
+                                <div class="plan-item__name">Оптимальный с автообновлением</div>
+                                <div class="plan-item__text">Публикация на 62 сайтах, включая: HH.ru, SuperJob.ru,  Rabota.ru, Юла.Работа. А также подборка резюме.</div>
+                                <div class="plan-item__price">4 443 руб.</div>
+                                <div class="plan-item__balance">На счету: <span>1</span></div>
+                            </div>
+                            <div class="plan-item plan-item--full js-plan-item-choice">
+                                <div class="plan-item__icon"></div>
+                                <div class="plan-item__name">Максимальный с автообновлением</div>
+                                <div class="plan-item__text">Публикация на 64 сайтах, включая: HH.ru, SuperJob.ru, Zarplata.ru, Rabota.ru, Юла.Работа, Авито, Вконтакте. А также подборка резюме.</div>
+                                <div class="plan-item__price">15 610 руб.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="new-job-block">
+                        <div class="new-job-block__title">Выбор ответственного менеджера</div>
+                        <div class="field-row field-row--middle">
+                            <div class="field-item field-item--group-2 field-item--full-select">
+                                <select class="js-select-2">
+                                    <option value="">Выбрать менеджера</option>
+                                    <option value="">Выбрать менеджера</option>
+                                    <option value="">Выбрать менеджера</option>
+                                    <option value="">Выбрать менеджера</option>
+                                </select>
+
+                                <a href="#" class="btn btn-gray">Назначить себя</a>
+                            </div>
+                        </div>
+
+                        <div class="form-action">
+                            <a href="#" class="btn btn-blue">Опубликовать</a>
+                            <a href="#" class="btn btn-light">Опубликовать</a>
+                        </div>
+                    </div>
+                </form>
+            </section>
+
+        </div>
+    </section><!--page-content-->
+</section><!--page-wrap-->
+<div class="overlay-menu"></div>
+<div class="mobile-menu">
+    <span class="menu__close">
+        <img class="svg-icon icon-popup-close" src="https://lk.jobers.ru/last/images/icon-close.svg">
+    </span>
+
+    <ul class="nav spacer">
+        <li class="nav__item">
+            <a href="/" class="nav__link  active ">
+                <img class="svg-icon icon-nav-1" src="https://lk.jobers.ru/last/images/icon-header-1.svg">
+                <span>Вакансии</span>
+            </a>
+        </li>
+
+        <li class="nav__item">
+            <a href="https://lk.jobers.ru/employees?" class="nav__link">
+                <img class="svg-icon icon-nav-2" src="https://lk.jobers.ru/last/images/icon-header-2.svg">
+                <span>Кандидаты</span>
+            </a>
+        </li>
+
+        <li class="nav__item">
+            <a href="/tariffs/create" class="nav__link">
+                <img class="svg-icon icon-nav-3" src="https://lk.jobers.ru/last/images/icon-header-3.svg">
+                <span>Тарифы</span>
+            </a>
+        </li>
+
+        <li class="nav__item">
+            <a href="#" class="nav__link">
+                <img class="svg-icon icon-nav-4" src="https://lk.jobers.ru/last/images/icon-header-4.svg">
+                <span>Настройки</span>
+            </a>
+        </li>
+
+        <li class="nav__item">
+            <span class="nav__link">
+                <img class="svg-icon icon-nav-5" src="https://lk.jobers.ru/last/images/icon-header-5.svg">
+                <span>Еще</span>
+            </span>
+
+            <ul class="nav__sec">
+                <li>
+                    <a href="/settings?tab=profile"
+                       class="nav__sec-link">Профиль</a>
+                </li>
+                <li>
+                    <a href="/settings?tab=companies"
+                       class="nav__sec-link">Компании</a>
+                </li>
+                <li>
+                    <a href="/settings?tab=documents"
+                       class="nav__sec-link">Документы</a>
+                </li>
+                <li>
+                    <a href="/settings?tab=notifications"
+                       class="nav__sec-link">Уведомления</a>
+                </li>
+                <li>
+                    <a href="/settings?tab=integrations"
+                       class="nav__sec-link">Интеграции</a>
+                </li>
+
+                <li>
+                    <a href="/settings?tab=templates"
+                       class="nav__sec-link">Шаблоны писем</a>
+                </li>
+                <li>
+                    <a href="/settings?tab=my_tariffs"
+                       class="nav__sec-link">Лицевой счет</a>
+                </li>
+
+            </ul>
+
+        </li>
+
+    </ul>
+    <a href="/vacancies/new">
+        <button class="blue-btn header__btn">
+            Добавить вакансию
+        </button>
+    </a>
+</div>
+<div class="hidden" id="loader">
+    <div class="loader-bg"></div>
+    <div class="loader"></div>
+</div>
+<div class="full-shadow js-full-shadow">
+    <div class="confirm-modal">
+        <img class="confirm-modal__close js-hide-full-shadow" src="https://lk.jobers.ru/jobers/img/pop-up/icons/X.svg"
+             alt="" width="13" height="13">
+        <div class="confirm-modal__title">
+            Вы действительно хотите <span class="js-delete-text">удалить</span> вакансию <b
+                class="js-title confirm-modal__title-quoute">Электрик</b>
+        </div>
+        <div class="js-description" style="color: #676E79; font-size: 14px; margin: 10px 0 30px;"></div>
+        <div class="confirm-modal__btns">
+            <button type="button" class="vacancy-btn__response js-submit js-action-link">
+                <a><img src="https://lk.jobers.ru/jobers/img/pop-up/icons/remove.svg" alt="">&nbsp;Удалить</a>
+            </button>
+            <button class="vacancy-btn__deny js-hide-full-shadow" type="button" data-url="">
+                <a>Отмена</a>
+            </button>
+        </div>
+    </div>
+</div>
+<div id="SITES_MODAL" class="_modal" data-modal="modalId"></div>
+<div id="TARIFFS_MODAL" class="hidden"></div>
+<div class="overlay">
+    <div class="va-middle">
+        <div class="popup popup-archive js-popup">
+
+
+            <p class="popup__title js-title">
+                Архивация вакансии "Менеджер по продажам"
+            </p>
+
+            <p class="popup__desc js-description">
+                Любую архивную вакансию можно разместить
+                повторно. Повторное размещение приравнивается
+                к новой публикации.
+            </p>
+
+            <div class="popup__buttons">
+                <button class="blue-btn popup__btn js-action-link" data-title="Портная" data-ids="" data-archive="1"
+                        data-url="/vacancies/mass-actions">Отправить в архив
+                </button>
+                <span class="popup__return">Отменить</span>
+            </div><!--popup__buttons-->
+
+        </div><!--popup-->
+        <div class="popup popup-delete js-popup">
+    <span class="popup__close">
+        <img class="svg-icon icon-popup-close" src="https://lk.jobers.ru/last/images/icon-close.svg">
+    </span>
+            <p class="popup__title js-title">
+                Удаление вакансии "Менеджер по продажам"
+            </p>
+            <p class="popup__desc js-description">
+                История работы по кандидатам по этой вакансии будет
+                удалена. Кандидаты, которые привязаны к этой вакансии,
+                останутся в базе.
+            </p>
+            <div class="popup__buttons">
+                <button class="blue-btn popup__btn js-action-link" data-title="Портная" data-ids="" data-delete="1"
+                        data-url="/vacancies/mass-actions">Удалить
+                </button>
+                <span class="popup__return">Отменить</span>
+            </div><!--popup__buttons-->
+        </div><!--popup-->
+        <div id="new_employee"></div>
+        <div id="AUTOFIT_MODAL" class="js-popup"></div>
+    </div>
+</div>
+<div class="js-noties" hidden>
+</div>
+
+<div class="popup-wrap js-popup-wrap">
+    <div class="popup-overlay js-popup-close"></div>
+    <div class="popup js-popup" data-popup="remove-job">
+        <button class="popup__close js-popup-close">X</button>
+        <div class="popup__title">
+            Удаление выбранных вакансий
+        </div>
+        <div class="popup__content">
+            <p class="accent-color">История работы по кандидатам по этим вакансии будет удалена. Кандидаты, которые привязаны к этим вакансиям, останутся в базе.</p>
+            <p>Если у Вас уже размещена вакансия на любом из ниже указанных сайтах, тогда вы сможете с легкостью импортировать основной текст. Чтобы импортировать вакансию к нам на сайт, добавьте ссылку в поле ниже и нажмите кнопку Импортировать.</p>
+        </div>
+        <div class="popup__action">
+            <a href="#" class="btn btn-blue">Удалить</a>
+            <a href="#" class="btn btn-light">Отменить</a>
+        </div>
+    </div>
+    <div class="popup js-popup" data-popup="spec">
+        <button class="popup__close js-popup-close">X</button>
+        <div class="popup__title">
+            Сэкономьте время на заполнение текста вакансии
+        </div>
+        <div class="popup__content">
+            <p>Если у Вас уже размещена вакансия на любом из ниже указанных сайтах, тогда вы сможете с легкостью импортировать основной текст. Чтобы импортировать вакансию к нам на сайт, добавьте ссылку в поле ниже и нажмите кнопку Импортировать.</p>
+            <p>Ссылка должна быть именно на вакансию, например:</p>
+            <p>
+                <a href="#" class="link">https://spb.hh.ru/vacancy/67514284</a>
+                <a href="#" class="link">https://www.superjob.ru/vakansii/uborschica-44295106.html</a>
+                <a href="#" class="link">https://www.rabota.ru/vacancy/46853382/</a>
+            </p>
+            <form action="">
+                <input type="text" placeholder="https://spb.hh.ru/vacancy/67514284" class="input-text-field">
+                <button class="btn btn-blue">Импортировать</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+        m[i] = m[i] || function () {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
+        m[i].l = 1 * new Date();
+        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(87093582, "init", {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true
+    });
+</script>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/87093582" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
+<!-- /Yandex.Metrika counter -->
+<script src="https://lk.jobers.ru/libs/jquery_3.3.1.min.js"></script>
+<script>
+    var sendDeveloperMessage = true;
+
+    window.onerror = function (message, source, lineno, colno, error) {
+        if (source) {
+            sendToDeveloper({
+                message: message,
+                source: source,
+                lineno: lineno,
+                colno: colno
+//                error: error
+            });
+        }
+//        console.log(message, source, lineno, colno, error.stack);
+    };
+
+    function sendToDeveloper(params) {
+        params.user_id = '8772';
+        params.url = 'https://lk.jobers.ru';
+        params.user_agent = navigator.userAgent;
+        if (sendDeveloperMessage) {
+            $.ajax({
+                url: 'https://lk.jobers.ru/developer/save-js-error',
+                type: "POST",
+                data: params
+            });
+            sendDeveloperMessage = false;
+        }
+    }
+</script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/jquery.mask.min.js"></script>
+
+
+<script src="https://lk.jobers.ru/js/noty.js"></script>
+<script src="https://lk.jobers.ru/last/js/main.js?t=1684152098"></script>
+<script src="https://lk.jobers.ru/last/js/script.js?t=1687269574"></script>
+<script src="https://lk.jobers.ru/js/gulp/common-min.js?id=8c02100ed2c1d9c8eec3"></script>
+<script src="https://lk.jobers.ru/jobers/js/autofit.js?t=1701326162"></script>
+<script>
+    $('.js-hide-full-shadow').click(function () {
+        $('.js-full-shadow').removeClass('active');
+    });
+
+    function showConfirmModal(title, dataset) {
+        var $modal = $('.js-full-shadow');
+        var submit = $modal.find('.js-submit')[0];
+        $modal.find('.js-title').text(title ? title : '');
+        $modal.find('.js-description').text(dataset['description']);
+        console.log(title);
+        $modal.find('.js-delete-text').text(dataset['archive'] == 1 ? 'добавить в архив' : 'удалить');
+        for (var s in dataset) {
+            if (dataset.hasOwnProperty(s)) {
+                submit.dataset[s] = dataset[s];
+            }
+        }
+
+        $modal.addClass('active');
+    }
+</script>
+<script src="https://lk.jobers.ru/libs/select2.full.min.js"></script>
+<script src="https://lk.jobers.ru/libs/select2-locale-ru-mod.js"></script>
+<script src="https://lk.jobers.ru/libs/jquery-ui.js"></script>
+<script src="https://lk.jobers.ru/jobers/js/tariffs.js?v=8"></script>
+<script>
+    $body.on('change', '.js-filter-input', function (e) {
+        var el = this;
+        var data = {};
+        removeUrlParam('page');
+        if ((this.type == 'checkbox')) {
+            if (this.name.indexOf('[]')) {
+                var name = this.name.replace('[]', '');
+                var arr = this.form.querySelectorAll('[name="' + this.name + '"]:checked');
+                removeUrlParam(name + '[]');
+                removeUrlParam(name);
+                data[name] = [];
+                for (var s in arr) {
+                    if (arr.hasOwnProperty(s)) {
+                        data[name][s] = arr[s].value;
+                    }
+                }
+            } else {
+                data[this.name] = this.value;
+            }
+        } else {
+            data[this.name] = this.value;
+        }
+        showLoader();
+        $('.js-items-all').prop('checked', false).change();
+        var $method = $.post;
+        if (typeof this.dataset['method'] !== 'undefined') {
+            if (this.dataset['method'] === 'get') {
+                $method = $.get;
+            }
+        }
+
+        $method(window.location.search, data, function (response) {
+            if (el) {
+                if (el.type == 'checkbox') {
+                    for (var s in data) {
+                        if (data.hasOwnProperty(s)) {
+                            if ((typeof data[s] === 'object') && !data[s].length) {
+
+                            } else {
+                                setUrlParam(s, data[s]);
+                            }
+                        }
+                    }
+                } else {
+                    setUrlParam(el.name, el.value);
+                }
+            }
+            hideLoader();
+        })
+    });
+    //редактирование имени элемента. элемент должен содержать блок класса js-edited_name с именем и input с классом js-name-input
+    $body.on('click', '.js-edit-name', function (e) {
+        var name = this.parentNode.querySelector('.js-edited_name');
+        var input = this.parentNode.querySelector('.js-name-input');
+        input.classList.toggle('hidden');
+        input.focus();
+        input.select();
+        if (input.classList.contains('hidden')) {
+            name.innerHTML = input.value;
+        }
+        name.classList.toggle('hidden');
+    });
+    //применить к имени элемента содержимое его поля ввода если с поля ушел фокус
+    $body.on('blur', '.js-name-input', function (e) {
+        var name = this.parentNode.querySelector('.js-edited_name');
+        name.innerHTML = this.value;
+        this.classList.add('hidden');
+        name.classList.remove('hidden');
+    });
+    $body.on('click', '.js-remove-folder', function (e) {
+        $(this).closest('li').remove();
+    });
+</script>
+<script>
+    $('.js-hide-full-shadow').click(function () {
+        $('.js-full-shadow').removeClass('active');
+    });
+
+    function showConfirmModal(title, dataset) {
+        var $modal = $('.js-full-shadow');
+        var submit = $modal.find('.js-submit')[0];
+        $modal.find('.js-title').text(title ? title : '');
+        $modal.find('.js-description').text(dataset['description']);
+        console.log(title);
+        $modal.find('.js-delete-text').text(dataset['archive'] == 1 ? 'добавить в архив' : 'удалить');
+        for (var s in dataset) {
+            if (dataset.hasOwnProperty(s)) {
+                submit.dataset[s] = dataset[s];
+            }
+        }
+
+        $modal.addClass('active');
+    }
+</script>
+<script>
+    function pageInit() {
+        $('.js-group-select').change(function (e) {
+            var $this = $(this);
+            var checked = this.checked;
+            var $group = $this.closest('.js-group');
+            var $count = $group.find('.js-group-count');
+            $group.find('.js-group-item').each(function (index, item) {
+                item.checked = checked;
+            });
+            $group.find('.js-group-item:eq(0)').change();
+        });
+        $('.js-group-item').change(function () {
+            var table = $(this).closest('.js-table');
+            var $group = $(this).closest('.js-group');
+            var $count = $group.find('.js-group-count');
+            var $ids = $group.find('.js-group-ids');
+            var $checked = $group.find('.js-group-item:checked');
+            var ids = [];
+            $count.text($checked.length);
+            $checked.each(function (index, item) {
+                ids[ids.length] = item.dataset['id'];
+            });
+            if (ids.length) {
+                table.addClass('table_all-selected');
+            } else {
+                table.removeClass('table_all-selected');
+            }
+            $ids[0].dataset['ids'] = ids;
+        });
+        $('.js-tab-link').click(function () {
+            $('.js-tab-link').removeClass('active');
+            this.classList.add('active');
+            $('.js-tab').removeClass('active');
+            $('.js-tab[data-tab="' + this.dataset['tab'] + '"]').addClass('active');
+        });
+        $('.js-popup-link').click(function () {
+            var $modal = $(this.dataset['href']);
+            $modal.find('.js-title').text(this.dataset['title']);
+            $modal.find('.js-description').text(this.dataset['description']);
+            $modal.find('.js-action-link')[0].dataset['ids'] = this.dataset['ids'];
+        });
+    }
+
+    pageInit();
+    window['sortable'] = function () {
+        $('.js-sortable').sortable();
+    };
+</script>
+<script src="https://lk.jobers.ru/jobers/js/script2.js?t=1687269574"></script>
+<script src="https://lk.jobers.ru/jobers/js/noty.js?t=1701326162"></script>
+<script src="https://lk.jobers.ru/jobers/js/total.js?t=1687269574"></script>
+
+</body>
+</html>
